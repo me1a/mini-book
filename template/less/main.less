@@ -6,6 +6,9 @@ body {
     height: 60px;
     width: 100%;
     background: white;
+    position: fixed;
+    top: 0;
+    z-index: 100;
 
     border-bottom: 1px solid #eee;
     transition: left 0.3s;
@@ -53,6 +56,28 @@ body {
 
 }
 
+.main {
+    padding-top: 60px;
+    position: relative;
+    background: gray;
+    display: flex;
+
+    .content {
+        height: 300px;
+        flex: 1 1 auto;
+        padding: 8px 16px
+    }
+
+    .left {
+        background: red;
+        flex: 0 0 200px
+    }
+
+    .right {
+        background: blue;
+        flex: 0 0 200px
+    }
+}
 
 
 
@@ -101,5 +126,14 @@ body {
 
         }
 
+    }
+
+    .main {
+        padding-top: 50px;
+
+        .left,
+        .right {
+            display: none;
+        }
     }
 }
