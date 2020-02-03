@@ -1,5 +1,6 @@
 body {
-    margin: 0
+    margin: 0;
+    font-size: 14px;
 }
 
 .header {
@@ -59,22 +60,85 @@ body {
 .main {
     padding-top: 60px;
     position: relative;
-    background: gray;
     display: flex;
 
-    .content {
-        height: 300px;
+    .center {
+        min-height: 500px;
         flex: 1 1 auto;
         padding: 8px 16px
     }
 
     .left {
-        background: red;
-        flex: 0 0 200px
+        // border-right: 1px solid #ededed;
+        flex: 0 0 216px;
+
+        .wrap {
+            position: fixed;
+            left: 8px;
+            top: 108px;
+            width: 200px;
+        }
+
+        .contents {
+
+            .item {
+                font-size: 12px;
+                color: #5e6d82;
+                // font-weight: 300;
+                user-select: none;
+
+                .name,
+                .link {
+                    cursor: pointer;
+                    padding: 3px 0;
+                    position: relative;
+
+                    display: flex;
+                    align-items: center;
+
+                    .iconfont {
+                        margin-right: 6px;
+                        color: #5e6d82
+                    }
+
+                    span {
+                        z-index: -1;
+                    }
+
+                    a {
+                        text-decoration: none;
+                        color: #5e6d82;
+                        display: inline-block;
+                        max-width: 150px;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        white-space: nowrap;
+                    }
+                }
+
+                .link:hover {
+                    background: #eee;
+                }
+
+                .children {
+                    display: none;
+
+                    &.open {
+                        display: block;
+
+                        .item {
+                            padding-left: 8px;
+                            border-left: 1px solid #ddd;
+                            margin-left: 8px;
+                        }
+                    }
+                }
+            }
+        }
     }
 
     .right {
-        background: blue;
+        border-left: 1px solid #ededed;
         flex: 0 0 200px
     }
 }
