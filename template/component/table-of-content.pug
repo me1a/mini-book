@@ -1,0 +1,34 @@
+mixin tableOfContent(content, isroot)
+  .contents
+    each item in content
+      if item.type === 'file'
+        .item
+          .link(title=item.name)
+            i(class='iconfont icon-file')
+            a(href=item.path ) #{item.name}
+      else if item.children.length > 0
+        .item
+          .name(title=item.name)
+            i(class='iconfont icon-folder-close')
+            span #{item.name}
+          if item.children
+            .children.open
+              +tableOfContent(item.children)
+
+block jstop
+  script.
+    window.addEventListener('load', () => {
+      const name = document.querySelectorAll('.name')
+      name.forEach(item => {
+        item.addEventListener('click', e => {
+          let next = e.target.nextElementSibling
+          if (next.classList.value.includes('open')) {
+            next.classList.remove('open')
+          } else {
+            next.classList.add('open')
+          }
+        })
+      })
+    })
+
+

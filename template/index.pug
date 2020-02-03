@@ -1,12 +1,18 @@
 extends ./component/layout.pug
+include ./component/table-of-content.pug 
 
 block css
     link(rel="stylesheet", href="/static/css/main.css")
+    link(rel="stylesheet", href="/static/css/template.css")
     link(rel="stylesheet", href="//at.alicdn.com/t/font_1197539_vgn2vpugpwq.css")
 block body
     .app
         include ./component/header.pug
         .main
             .left
-            .content fdsfs
+                .wrap
+                    +tableOfContent(tree, true)
+            .center
+                .content
+                    != doc
             .right
