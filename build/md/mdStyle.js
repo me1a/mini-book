@@ -25,7 +25,7 @@ module.exports = function () {
           }
         }
       } else if (item.type === 'element' && item.tagName === 'table') {
-        item.properties.className = ['table', 'table-bordered']
+        item.properties.className = ['table']
 
         const th = item.children
           .filter(i => i.tagName === 'thead')[0].children
