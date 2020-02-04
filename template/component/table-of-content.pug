@@ -4,13 +4,13 @@ mixin tableOfContent(content, isroot)
       if item.type === 'file'
         .item
           .link(title=item.name)
-            i(class='iconfont icon-file')
+            //- i(class='iconfont icon-file')
             a(href=item.path ) #{item.name}
       else if item.children.length > 0
         .item
-          .name(title=item.name)
-            i(class='iconfont icon-folder-close')
-            span #{item.name}
+          .name(title=item.name.toUpperCase()).h
+            //- i(class='iconfont icon-folder-close')
+            span #{item.name.toUpperCase()}
           if item.children
             .children.open
               +tableOfContent(item.children)
