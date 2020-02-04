@@ -1,12 +1,7 @@
 // Material Design shadows
 // 
 .shadow-z-1 {
-    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12),
-        0 1px 2px 0 rgba(0, 0, 0, .24);
-    -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12),
-        0 1px 2px 0 rgba(0, 0, 0, .24);
-    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .12),
-        0 1px 2px 0 rgba(0, 0, 0, .24);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12);
 }
 
 
@@ -46,7 +41,7 @@
     width: 100%;
     max-width: 100%;
     margin-bottom: 2rem;
-    background-color: @table-bg;
+    border-radius: 16px;
 
     >thead,
     >tbody,
@@ -60,8 +55,9 @@
                 padding: @table-cell-padding;
                 vertical-align: top;
                 border-top: 0;
+                color: #333;
                 .transition(all .3s ease);
-                background: #fefefe;
+                // background: #fefefe;
                 line-height: 24px;
                 min-width: 100px;
             }
@@ -70,9 +66,9 @@
 
     >thead>tr>th {
         font-weight: @table-header-font-weight;
-        color: @table-header-font-color;
+        // color: @table-header-font-color;
         vertical-align: bottom;
-        border-bottom: 1px solid rgba(0, 0, 0, .12);
+        border-bottom: 1px solid rgba(0, 0, 0, .05);
     }
 
     >caption+thead,
@@ -179,6 +175,11 @@
 // by vertical table-cell display. Only applies <768px. Everything above that will display normally.
 // For correct display you must add 'data-title' to each 'td'
 .table-responsive-vertical {
+    margin: 40px;
+    background-color: white;
+    border-radius: 8px;
+    padding: 8px;
+
 
     @media screen and (max-width: 768px) {
 
@@ -213,7 +214,6 @@
                         float: left;
                         font-size: inherit;
                         font-weight: @table-header-font-weight;
-                        // color: @table-header-font-color;
                     }
                 }
             }
