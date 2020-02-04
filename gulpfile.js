@@ -11,7 +11,7 @@ const markdownToHtml = require('./build/gulp-markdown-to-html')
 
 const globs = {
     pug: 'template/**/*.pug',
-    less: 'template/less/*.less',
+    less: 'template/less/**/*.less',
     img: 'template/img/*',
     markdown: 'docs/**/*.md'
 }
@@ -63,6 +63,7 @@ function lessTask() {
 function watchTask() {
     watch(globs.less, lessTask)
     watch(globs.markdown, markdownTask)
+    watch(globs.pug, markdownTask)
 }
 
 
