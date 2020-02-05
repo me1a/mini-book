@@ -65,6 +65,76 @@ body {
     }
 }
 
+.contents {
+    padding: 0 8px;
+
+    .item {
+        // font-weight: 300;
+        user-select: none;
+        margin: 8px 0;
+
+        .name,
+        .link {
+            &.h {
+                color: #333;
+                font-weight: bold;
+            }
+
+
+
+            .iconfont {
+                margin-right: 6px;
+                color: #5e6d82
+            }
+
+            span {
+                position: relative;
+                z-index: -1;
+            }
+
+            a {
+                text-decoration: none;
+                color: #5e6d82;
+                padding: 3px 0;
+                position: relative;
+                display: inline-block;
+                width: 100%;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+
+                &:hover {
+                    color: #333
+                }
+
+                &.active {
+                    color: #333;
+                    font-weight: bold;
+                }
+            }
+        }
+
+
+        .children {
+            display: none;
+
+            &.open {
+                display: block;
+
+                .item {
+                    padding-left: 8px;
+                    // border-left: 1px solid #ddd;
+                    margin-left: 8px;
+                }
+            }
+        }
+    }
+}
+
+.header {
+    display: none;
+}
+
 
 .main {
     // padding-top: 60px;
@@ -103,114 +173,19 @@ body {
             width: 200px
         }
 
+        .logo-wrap {
+            .logo {
+                font-size: 34px;
+                font-family: fantasy;
+                font-weight: bold;
+                text-align: center;
+                display: block;
+                height: 100px;
+            }
+        }
+
         .search-wrap {
             margin: 24px 0 36px;
-        }
-
-        .header {
-            height: 60px;
-            width: 100%;
-            background: white;
-            // border-bottom: 1px solid #eee;
-            transition: left 0.3s;
-
-            i,
-            a {
-                line-height: 60px;
-            }
-
-
-            .iconfont {
-                display: none;
-            }
-
-            .link {
-                display: inline-block;
-                color: #666;
-                text-decoration: none;
-                font-weight: 300;
-                margin-left: 16px;
-            }
-
-            .header-left {
-
-                a {
-                    font-weight: bold;
-                    text-decoration: none;
-                    // line-height: 50px;
-                    font-family: fantasy;
-                    color: #333;
-                    font-size: 24px;
-                    margin-left: 8px;
-                }
-
-            }
-
-        }
-
-        .contents {
-            padding: 0 8px;
-
-            .item {
-                // font-weight: 300;
-                user-select: none;
-                margin: 8px 0;
-
-                .name,
-                .link {
-                    &.h {
-                        color: #333;
-                        font-weight: bold;
-                    }
-
-
-
-                    .iconfont {
-                        margin-right: 6px;
-                        color: #5e6d82
-                    }
-
-                    span {
-                        z-index: -1;
-                    }
-
-                    a {
-                        text-decoration: none;
-                        color: #5e6d82;
-                        padding: 3px 0;
-                        position: relative;
-                        display: inline-block;
-                        width: 100%;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                        white-space: nowrap;
-
-                        &:hover {
-                            color: #333
-                        }
-
-                        &.active {
-                            color: #333;
-                            font-weight: bold;
-                        }
-                    }
-                }
-
-
-                .children {
-                    display: none;
-
-                    &.open {
-                        display: block;
-
-                        .item {
-                            padding-left: 8px;
-                            // border-left: 1px solid #ddd;
-                            margin-left: 8px;
-                        }
-                    }
-                }
-            }
         }
     }
 
@@ -264,14 +239,19 @@ body {
     background: white;
 }
 
+.mock-toc {
+    display: none;
+}
+
 
 @media (max-width: 1024px) {
     .header {
+        display: block;
         height: 50px;
         width: 100%;
         background: white;
         position: fixed;
-        z-index: 30;
+        z-index: 3000;
         top: 0;
         left: 0;
         border-bottom: 1px solid #eee;
@@ -282,7 +262,7 @@ body {
             line-height: 50px;
         }
 
-        .right {
+        .header-right {
             right: 16px;
             position: absolute;
         }
@@ -291,16 +271,13 @@ body {
             display: inline-block;
         }
 
-        .left {
+        .header-left {
             left: 16px;
             position: absolute;
-
-
 
             a {
                 font-weight: bold;
                 text-decoration: none;
-                // line-height: 50px;
                 font-family: fantasy;
                 color: #333;
                 font-size: 16px;
@@ -312,11 +289,45 @@ body {
     }
 
     .main {
-        padding-top: 50px;
+        margin-top: 50px;
+        display: block;
 
         .left,
         .right {
             display: none;
         }
+    }
+
+    .mock-toc {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        z-index: 4000;
+        padding: 24px 0;
+        background: rgba(255, 255, 255, 1);
+        overflow-y: auto;
+        text-align: center;
+
+        .item {
+            padding: 0 !important;
+            margin: 0 !important
+        }
+
+        .name.h {
+            padding: 8px 0 !important;
+        }
+    }
+
+    .mock-toc.active {
+        .icon-close {
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 24px;
+        }
+
+        display: block;
     }
 }
