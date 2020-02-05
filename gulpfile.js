@@ -1,6 +1,7 @@
 const { parallel, series, src, dest, watch } = require('gulp')
 const pug = require('gulp-pug')
 const browserSync = require('browser-sync').create()
+const clean = require('gulp-clean')
 
 const less = require('gulp-less')
 const miniCss = require('gulp-clean-css')
@@ -18,6 +19,10 @@ const globs = {
 }
 
 let tree = []
+
+function cleanTask() {
+    return src('dist/*').pipe(clean({ allowEmpty: true }))
+}
 
 
 function getTree(cb) {
@@ -61,7 +66,7 @@ function lessTask() {
 }
 
 function pugTask() {
-    return src(globs.index).pipe(pug({
+    return src(globs.index[0]).pipe(pug({
         locals: {
             tree
         }
@@ -73,5 +78,6 @@ function watchTask() {
     watch([globs.markdown, ...globs.doc], markdownTask)
 }
 
-
-exports.default = parallel(getTree, series(pugTask, markdownTask, lessTask, watchTask), server)
+exports.clean = cleanTask
+exports.default = parallel(cleanTask, getTree, series(pugTask, markdownTask, lessTask, watchTask), server)
+exports.build = parallel(cleanTask, getTree, markdownTask, series(pugTask, lessTask))
