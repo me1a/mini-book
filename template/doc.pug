@@ -10,8 +10,12 @@ block body
         .main
             .left
                 .wrap
-                    include ./component/header.pug
-                    +tableOfContent(tree, true)
+                    .logo-wrap
+                        include ./component/header.pug
+                    .search-wrap
+                        include ./component/search.pug
+                    .toc-wrap
+                        +tableOfContent(tree, true)
             .center
                 include ./component/content.pug
             .right
