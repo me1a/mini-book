@@ -182,6 +182,7 @@
 
 
     @media screen and (max-width: 768px) {
+        margin: 40px 8px;
 
         // Tighten up spacing
         >.table {
@@ -197,22 +198,24 @@
                 display: block;
 
                 >tr {
+                    background-color: @table-bg;
                     display: block;
                     border: 1px solid @table-border-color;
-                    border-radius: 2px;
-                    margin-bottom: @table-cell-padding;
+                    border-radius: 4px;
+                    margin-bottom: @table-cell-padding*2;
 
                     >td {
-                        background-color: @table-bg;
                         display: block;
                         vertical-align: middle;
-                        text-align: right;
+                        // text-align: right;
                     }
 
                     >td[data-title]:before {
                         content: attr(data-title);
                         float: left;
                         font-size: inherit;
+                        min-width: 60px;
+                        text-align: left;
                         font-weight: @table-header-font-weight;
                     }
                 }
