@@ -17,7 +17,7 @@ script.
       _SEARCH_DATA.forEach(item => {
         if(item.title.includes(v) || v ==='') {
           if(v === ''&& item.type!==1) return
-          html += `<a href='${item.url}'>${item.title.replace(new RegExp(v, 'g'), `<b>${v}</b>`)}</a>`
+          html += `<a href='${item.url}#${item.title.replace(/[\.\(\)]/g,'').toLowerCase()}'>${item.title.replace(new RegExp(v, 'g'), `<b>${v}</b>`)}</a>`
         }
       })
       return html
