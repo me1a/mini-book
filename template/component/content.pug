@@ -1,0 +1,29 @@
+.content
+    != doc
+script.
+    window.addEventListener('load', ()=>{
+        const toc = document.querySelector("#目录").nextElementSibling
+        if(toc.tagName === 'UL') {
+        const t = toc.cloneNode(true)
+        t.id = 'toc'
+        document.querySelector('.toc').append(t)
+        }
+        const h2s  = document.querySelectorAll('h2')
+        const tops = Array.from(h2s).map(item => item.offsetTop)
+        
+        const li = document.querySelectorAll('#toc li')
+        li[0].setAttribute('class', 'active')
+
+        window.addEventListener('scroll', function(e) {
+        const scroll = document.documentElement.scrollTop
+        for(let i = 0 ;i < tops.length ; i++) {
+            if(scroll-30>= tops[i] ) {
+            for(let j = 0; j < li.length; j++) {
+                li[j].setAttribute('class', '')
+            }
+            li[i].setAttribute('class', 'active')
+            }
+        }
+        })
+    })
+        
