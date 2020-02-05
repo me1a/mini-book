@@ -9,6 +9,61 @@ body {
     font-size: 12px;
 }
 
+.search {
+    position: relative;
+
+    input {
+        display: block;
+        box-sizing: border-box;
+        width: 100%;
+        border: 1px solid #dedede;
+        outline: none;
+        color: #888;
+        padding: 0 8px;
+        height: 34px;
+        position: relative;
+        z-index: 6;
+        border-radius: 0;
+
+        &:focus {
+            border: 1px solid #333;
+        }
+
+    }
+
+    .result {
+        width: 100%;
+        position: absolute;
+        top: 30px;
+        z-index: 4;
+        background: white;
+        border: 1px solid #dedede;
+        overflow-x: hidden;
+        overflow-y: auto;
+        max-height: 0;
+
+        a {
+            display: block;
+            width: 100%;
+            padding: 6px 8px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+            text-decoration: none;
+            color: #888;
+            font-size: 13px;
+
+            b {
+                color: #333
+            }
+        }
+
+        &.active {
+            max-height: 200px;
+            top: 40px;
+        }
+    }
+}
 
 
 .main {
@@ -26,9 +81,6 @@ body {
         position: relative;
         z-index: 51;
         background: white;
-
-
-
     }
 
     .wrap {
