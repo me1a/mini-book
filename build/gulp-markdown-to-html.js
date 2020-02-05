@@ -13,17 +13,11 @@ module.exports = (options = {}) => {
 
     try {
       const obj = md2obj(file.path)
-      const name = file.path.slice(process.cwd().length, -3)
-      const url = name + '.html'
       const compiledFunction = pug.compileFile(options.template)
       const str = compiledFunction({
         ...obj,
-        tree: options.tree
-      })
-
-      options.visit && options.visit({
-        url,
-        ...obj
+        tree: options.tree,
+        search: options.search
       })
       file.contents = Buffer.from(str);
       file.extname = '.html'

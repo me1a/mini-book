@@ -8,6 +8,7 @@ const miniCss = require('gulp-clean-css')
 const dirTree = require('directory-tree')
 
 const markdownToHtml = require('./build/gulp-markdown-to-html')
+const md2obj = require('./build/md/index')
 
 
 const globs = {
@@ -19,18 +20,29 @@ const globs = {
 }
 
 let tree = []
+let search = []
 
 function cleanTask() {
-    return src('dist/*').pipe(clean({ allowEmpty: true }))
+    return src('dist/*').pipe(clean())
 }
 
 
 function getTree(cb) {
     tree = dirTree('docs', { extensions: /\.md$/ }, (item, v, stats) => {
         if (item.type === 'file') {
-            console.log(item.path)
-            item.path = '/' + item.path.slice(0, -3) + '.html'
-            item.name = item.name.slice(0, -3)
+            const obj = md2obj(`${item.path}`)
+            const url = '/' + item.path.slice(0, -3) + '.html'
+            item.path = url
+            obj._url = url
+            // item.name = item.name.slice(0, -3)
+            item.name = obj._title
+
+
+            if (!search.some(i => obj._search.some(j => i.title === j.value) && i.url === url)) {
+                obj._search.forEach(i => {
+                    search.push({ title: i.value, url, type: i.type })
+                })
+            }
         }
     }).children
     cb()
@@ -54,7 +66,8 @@ function server() {
 function markdownTask() {
     return src(globs.markdown).pipe(markdownToHtml({
         template: 'template/doc.pug',
-        tree
+        tree,
+        search
     })).pipe(dest('dist/docs'))
 }
 
@@ -68,7 +81,8 @@ function lessTask() {
 function pugTask() {
     return src(globs.index[0]).pipe(pug({
         locals: {
-            tree
+            tree,
+            search,
         }
     })).pipe(dest('dist/'))
 }
