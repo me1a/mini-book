@@ -1,32 +1,40 @@
+
 script
     != 'window._SEARCH_DATA = ' + JSON.stringify(search)
 .search
     input(placeholder='搜搜文章')
     .result
 script.
-   const searchBox = document.querySelector('.search')
-   const result = searchBox.querySelector('.result')
-   const input = searchBox.querySelector('input')
-   input.addEventListener('input', e => {
-      let v = e.target.value
-      result.innerHTML = getHtml(v)
-   })
-   result.innerHTML = getHtml()
-   function getHtml(v = '') {
-       let html = ''
-      _SEARCH_DATA.forEach(item => {
-        if(item.title.includes(v) || v ==='') {
-          if(v === ''&& item.type!==1) return
-          html += `<a href='${item.url}#${item.title.replace(/[\.\(\)]/g,'').toLowerCase()}'>${item.title.replace(new RegExp(v, 'g'), `<b>${v}</b>`)}</a>`
-        }
+  window.addEventListener('load', ()=>{
+      if(window._SEARCH_COMPONENT !== undefined) {
+        window._SEARCH_COMPONENT = window._SEARCH_COMPONENT + 1
+      } else {
+        window._SEARCH_COMPONENT = 0
+      }
+      var searchBox = document.querySelectorAll('.search')[window._SEARCH_COMPONENT]
+      var result = searchBox.querySelector('.result')
+      var input = searchBox.querySelector('input')
+      input.addEventListener('input', e => {
+        let v = e.target.value
+        result.innerHTML = getHtml(v)
       })
-      return html
-   }
-    input.addEventListener('focus', e => {
-      result.classList.add('active')
-   })
-    input.addEventListener('blur', e => {
-      setTimeout(()=>{
-        result.classList.remove('active')
-      },200)
-   })
+      result.innerHTML = getHtml()
+      function getHtml(v = '') {
+          let html = ''
+        _SEARCH_DATA.forEach(item => {
+          if(item.title.includes(v) || v ==='') {
+            if(v === ''&& item.type!==1) return
+            html += `<a href='${item.url}#${item.title.replace(/[\.\(\)]/g,'').toLowerCase()}'>${item.title.replace(new RegExp(v, 'g'), `<b>${v}</b>`)}</a>`
+          }
+        })
+        return html
+      }
+      input.addEventListener('focus', e => {
+        result.classList.add('active')
+      })
+      input.addEventListener('blur', e => {
+        setTimeout(()=>{
+          result.classList.remove('active')
+        },200)
+      })
+  })

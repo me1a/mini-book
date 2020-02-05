@@ -51,7 +51,7 @@ body {
             white-space: nowrap;
             text-decoration: none;
             color: #888;
-            font-size: 13px;
+            font-size: 12px;
 
             b {
                 color: #333
@@ -246,7 +246,10 @@ body {
 
 @media (max-width: 1024px) {
     .header {
-        display: block;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 16px;
         height: 50px;
         width: 100%;
         background: white;
@@ -257,23 +260,25 @@ body {
         border-bottom: 1px solid #eee;
         transition: left 0.3s;
 
-        i,
-        a {
-            line-height: 50px;
-        }
 
         .header-right {
-            right: 16px;
-            position: absolute;
-        }
 
-        .iconfont {
-            display: inline-block;
+            flex: 1 1 auto;
+
+            .search-wrap {
+                display: flex;
+                align-items: center;
+                justify-content: flex-end;
+
+                input {
+                    border: none;
+                }
+            }
         }
 
         .header-left {
-            left: 16px;
-            position: absolute;
+            flex: 0 0 120px;
+            margin-top: 5px;
 
             a {
                 font-weight: bold;

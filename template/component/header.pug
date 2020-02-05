@@ -3,7 +3,9 @@ header.header
         i.iconfont.icon-menu
         a(href="/") Mini Book
     .header-right
-        i.iconfont.icon-search
+        .search-wrap
+            include ./search.pug
+            i.iconfont.icon-search
 .mock-toc
     i.iconfont.icon-close
     +tableOfContent(tree, true)
