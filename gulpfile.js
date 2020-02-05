@@ -10,7 +10,8 @@ const markdownToHtml = require('./build/gulp-markdown-to-html')
 
 
 const globs = {
-    pug: 'template/**/*.pug',
+    doc: ['template/doc.pug', 'template/component/*.pug'],
+    index: ['template/index.pug', 'template/component/*.pug'],
     less: 'template/less/**/*.less',
     img: 'template/img/*',
     markdown: 'docs/**/*.md'
@@ -27,7 +28,6 @@ function getTree(cb) {
             item.name = item.name.slice(0, -3)
         }
     }).children
-    console.log(tree)
     cb()
 }
 
@@ -44,9 +44,11 @@ function server() {
 }
 
 
+
+
 function markdownTask() {
     return src(globs.markdown).pipe(markdownToHtml({
-        template: 'template/index.pug',
+        template: 'template/doc.pug',
         tree
     })).pipe(dest('dist/docs'))
 }
@@ -58,13 +60,18 @@ function lessTask() {
         .pipe(dest('dist/static/css/'))
 }
 
-
+function pugTask() {
+    return src(globs.index).pipe(pug({
+        locals: {
+            tree
+        }
+    })).pipe(dest('dist/'))
+}
 
 function watchTask() {
     watch(globs.less, lessTask)
-    watch(globs.markdown, markdownTask)
-    watch(globs.pug, markdownTask)
+    watch([globs.markdown, ...globs.doc], markdownTask)
 }
 
 
-exports.default = parallel(getTree, series(markdownTask, lessTask, watchTask), server)
+exports.default = parallel(getTree, series(pugTask, markdownTask, lessTask, watchTask), server)
