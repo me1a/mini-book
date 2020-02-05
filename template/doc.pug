@@ -4,14 +4,15 @@ include ./component/table-of-content.pug
 block css
     link(rel="stylesheet", href="/static/css/main.css")
     link(rel="stylesheet", href="/static/css/template.css")
-    link(rel="stylesheet", href="//at.alicdn.com/t/font_1197539_vgn2vpugpwq.css")
+    link(rel="stylesheet", href="//at.alicdn.com/t/font_1628469_ujp8jeb8zyr.css")
 block body
     .app
+        include ./component/header.pug
         .main
             .left
                 .wrap
                     .logo-wrap
-                        include ./component/header.pug
+                        a.logo(href='/') Mini Book
                     .search-wrap
                         include ./component/search.pug
                     .toc-wrap
