@@ -105,12 +105,7 @@ body {
                         font-weight: bold;
                     }
 
-                    cursor: pointer;
-                    padding: 3px 0;
-                    position: relative;
 
-                    display: flex;
-                    align-items: center;
 
                     .iconfont {
                         margin-right: 6px;
@@ -124,17 +119,25 @@ body {
                     a {
                         text-decoration: none;
                         color: #5e6d82;
+                        padding: 3px 0;
+                        position: relative;
                         display: inline-block;
                         width: 100%;
                         overflow: hidden;
                         text-overflow: ellipsis;
                         white-space: nowrap;
+
+                        &:hover {
+                            color: #333
+                        }
+
+                        &.active {
+                            color: #333;
+                            font-weight: bold;
+                        }
                     }
                 }
 
-                .link:hover {
-                    background: #eee;
-                }
 
                 .children {
                     display: none;
