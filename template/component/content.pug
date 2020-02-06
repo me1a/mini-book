@@ -14,16 +14,26 @@ script.
         const li = document.querySelectorAll('#toc li')
         li[0].setAttribute('class', 'active')
 
+
+        function scrollActive(scroll, arr){
+            let i = 0
+            for(; i<arr.length; i++){
+                if(arr[i] - scroll-2 > 0){
+                    return i - 1 > 0 ?i-1:0
+                }
+            }
+            return i-1
+        }
+
         window.addEventListener('scroll', function(e) {
-        const scroll = document.documentElement.scrollTop
-        for(let i = 0 ;i < tops.length ; i++) {
-            if(scroll-30>= tops[i] ) {
+            const scroll = document.documentElement.scrollTop
+            console.log(scroll+'',tops.toString())
+            let i = scrollActive(scroll, tops)
+            console.log(i)
             for(let j = 0; j < li.length; j++) {
                 li[j].setAttribute('class', '')
             }
             li[i].setAttribute('class', 'active')
-            }
-        }
         })
     })
         
