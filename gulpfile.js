@@ -6,6 +6,7 @@ const clean = require('gulp-clean')
 const less = require('gulp-less')
 const miniCss = require('gulp-clean-css')
 const dirTree = require('directory-tree')
+const image = require('gulp-imagemin')
 
 const markdownToHtml = require('./build/gulp-markdown-to-html')
 const md2obj = require('./build/md/index')
@@ -15,7 +16,7 @@ const globs = {
     doc: ['template/doc.pug', 'template/component/*.pug'],
     index: ['template/index.pug', 'template/component/*.pug'],
     less: 'template/less/**/*.less',
-    img: 'template/img/*',
+    img: 'template/img/**/*.*',
     markdown: 'docs/**/*.md'
 }
 
@@ -26,6 +27,12 @@ function cleanTask() {
     return src('dist/*').pipe(clean())
 }
 
+
+function imageTask() {
+    return src(globs.img).pipe(image([
+        image.optipng({ optimizationLevel: 5 })
+    ])).pipe(dest('dist/static/img'))
+}
 
 function getTree(cb) {
     tree = dirTree('docs', { extensions: /\.md$/ }, (item, v, stats) => {
@@ -95,5 +102,6 @@ function watchTask(cb) {
 }
 
 exports.clean = cleanTask
-exports.default = series(cleanTask, getTree, parallel(pugTask, markdownTask, lessTask), watchTask, server)
-exports.build = series(cleanTask, getTree, parallel(pugTask, markdownTask, lessTask))
+exports.default = series(cleanTask, getTree, parallel(pugTask, imageTask, markdownTask, lessTask), watchTask, server)
+exports.build = series(cleanTask, getTree, parallel(pugTask, imageTask, markdownTask, lessTask))
+exports.img = imageTask
