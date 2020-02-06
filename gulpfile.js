@@ -87,11 +87,12 @@ function pugTask() {
     })).pipe(dest('dist/'))
 }
 
-function watchTask() {
+function watchTask(cb) {
     watch(globs.less, lessTask)
     watch([globs.markdown, ...globs.doc], markdownTask)
+    cb()
 }
 
 exports.clean = cleanTask
-exports.default = parallel(cleanTask, getTree, series(pugTask, markdownTask, lessTask, watchTask), server)
-exports.build = parallel(cleanTask, getTree, markdownTask, series(pugTask, lessTask))
+exports.default = series(cleanTask, getTree, parallel(pugTask, markdownTask, lessTask), watchTask, server)
+exports.build = series(cleanTask, getTree, parallel(pugTask, markdownTask, lessTask))
