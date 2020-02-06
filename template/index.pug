@@ -6,12 +6,8 @@ block css
     link(rel="stylesheet", href="//at.alicdn.com/t/font_1197539_vgn2vpugpwq.css")
 block body
     .app
-        .main
-            .left
-                .wrap
-                    include ./component/header.pug
-                    +tableOfContent(tree, true)
-            .center
+        .index
+            .wrap
+                .logo Mini Book
                 include ./component/search.pug
-        .footer
     

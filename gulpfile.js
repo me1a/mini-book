@@ -90,6 +90,7 @@ function pugTask() {
 function watchTask(cb) {
     watch(globs.less, lessTask)
     watch([globs.markdown, ...globs.doc], markdownTask)
+    watch(globs.index, pugTask)
     cb()
 }
 
