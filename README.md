@@ -21,7 +21,7 @@
 
 网站：[http://www.lome.ink](http://www.lome.ink)
  
-![example](template/img/example.png)
+![example](https://github.com/me1a/mini-book/blob/master/template/img/example.png)
 
 ## 介绍
 
