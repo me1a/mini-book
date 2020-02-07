@@ -29,9 +29,7 @@ function cleanTask() {
 
 
 function imageTask() {
-    return src(globs.img).pipe(image([
-        image.optipng({ optimizationLevel: 5 })
-    ])).pipe(dest('dist/static/img'))
+    return src(globs.img).pipe(image()).pipe(dest('dist/static/img'))
 }
 
 function getTree(cb) {
